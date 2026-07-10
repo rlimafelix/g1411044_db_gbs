@@ -1,0 +1,8 @@
+DELIMITER //
+
+CREATE PROCEDURE get_appointment_by_doctor(IN p_doctor_id INT)
+BEGIN
+    SELECT * FROM nhs_db.appointment WHERE doctor_id = p_doctor_id;
+END //
+
+DELIMITER ;
