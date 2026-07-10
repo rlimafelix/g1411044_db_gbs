@@ -1,0 +1,12 @@
+DELIMITER //
+
+CREATE TRIGGER nhs_db.before_insert_appointment_time
+BEFORE INSERT ON appointment
+FOR EACH ROW
+BEGIN
+    IF NEW.appointment_time < NOW() THEN
+        SET NEW.appointment_time = NOW();
+    END IF;
+END //
+
+DELIMITER ;
