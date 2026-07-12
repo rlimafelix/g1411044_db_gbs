@@ -1,0 +1,6 @@
+-- Was used email column as hashing
+
+SELECT 
+patient_id,  
+SHA2(email, 256) AS email_hashed 
+FROM nhs_db.patient;
