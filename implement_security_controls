@@ -1,0 +1,41 @@
+create role 'admin_role', 'doctor_role', 'receptionist_role', 'patient_role';
+
+--admin
+
+grant all privileges on nhs_db. * to 'admin_role';
+
+--doctor
+
+grant select on nhs_db.patient to 'doctor_role';
+grant select, update on  nhs_db.appointment to 'doctor_role';
+grant select, insert, update on nhs_db.medication to 'doctor_role';
+grant select on nhs_db.doctor to 'doctor_role';
+
+--receptionist
+
+grant select, insert, update on nhs_db.appointment to 'receptionist_role';
+grant select, insert, update on  nhs_db.patient to 'receptionist_role';
+grant select on nhs_db.doctor to 'receptionist_role';
+grant select on nhs_db.clinic to 'receptionist_role';
+
+
+--patient
+
+grant select on nhs_db.patient to 'patient_role';
+grant select on  nhs_db.doctor to 'patient_role';
+grant select on nhs_db.appointment to 'patient_role';
+grant select on nhs_db.medication to 'patient_role';
+
+-- To create user for each role
+
+create user 'admin_user'@'localhost' identified by 'admin123';
+create user 'doctor_user'@'localhost' identified by 'doctor123';
+create user 'reception_user'@'localhost' identified by 'reception123';
+create user 'Oliver'@'localhost' identified by 'patient123';
+
+-- To attributes each user for each role
+
+GRANT 'admin_role' TO 'admin_user'@'localhost';
+GRANT 'doctor_role' TO 'doctor_user'@'localhost';
+GRANT 'receptionist_role' TO 'reception_user'@'localhost';
+GRANT 'patient_role' TO 'Oliver'@'localhost';
